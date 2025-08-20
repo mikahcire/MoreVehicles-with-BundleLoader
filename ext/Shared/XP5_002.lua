@@ -1,3 +1,6 @@
+--You will no longer be using the 'BundlesToMount' section. It's ok to leave it as is, comment it out, or delete it.
+--The submodule mod 'BundleLoader' will handle injecting the SuperBundle, Bundles, and RegistryGuids. Refer to 'BundleLoader' README.md for how to set it up.
+
 CONFIG['XP5_002'] = {
 	['ConquestSmall0'] = { 
 		SubWorldGuids = {

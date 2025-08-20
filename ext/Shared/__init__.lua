@@ -1,9 +1,54 @@
+--You do not need to edit the BundleLoader.lua located here. It's written to work with its own template file/folder structure. Refer to the docs here: https://github.com/FlashHit/BundleLoader
+require("__shared/submodules/BundleLoader/BundleLoader.lua") 
+
+--[[
+For setting the BundeLoader bundle configurations for maps, modes, etc., 
+	you'll need to edit what's inside the 'ext/Shared/BundleConfig' folder
+		Refer to the instructions on this page: https://github.com/FlashHit/BundleLoader
+
+As an example, I currently have it setup as "Per Level + GameMode" (that's one of the options to set it up according to https://github.com/FlashHit/BundleLoader)
+	MP_001 ConquestSmall0, I have the bundle config inside this path: 'ext/Shared/BundleConfig/Levels/MP_001/ConquestSmall0.lua'
+	MP_001 ConquestLarge0, I have the bundle config inside this path: 'ext/Shared/BundleConfig/Levels/MP_001/ConquestLarge0.lua'
+	MP_003 ConquestLarge0, I have the bundle config inside this path: 'ext/Shared/BundleConfig/Levels/MP_003/ConquestSmall0.lua'	
+
+You might choose a different setup, 
+	so you'd need to create the same folder structure as what's listed in the readme on: https://github.com/FlashHit/BundleLoader 	
+]]
+
+--Removing invisible ceiling collision is necessary for flying helicopters on Bazaar, Seine, etc. Doesn't work for Metro.
+require ("__shared/RemoveInvisibleCeilingCollision.lua") 
+
+--Move Powback's NoFlightCeiling mod into the Shared folder instead of Server folder. Thanks @DesertShadow & @Jassent!
+--This ensures there's no wobble/turbulence when flying air vehicles above the previous flight ceiling.
+require ("__shared/NoFlightCeiling.lua")
+
+--To turn on BundleLoader debug messages, choose true. If not, set to False.
+DEBUG = true
+
+--These are the config files that originally came with CQ-MoreVehicles mod
+--Within these CONFIG files, you will no longer be using the 'BundlesToMount' section. It's ok to leave it as is, comment it out, or delete it.
 CONFIG = {}
-require("__shared/MP_001") -- Grand Bazaar
-require("__shared/MP_003") -- Teheran Highway
-require("__shared/MP_012") -- Operation Firestorm
-require("__shared/MP_018") -- Kharg Island
-require("__shared/XP5_002") -- Nebandan Flats
+
+-- Metro  -RushLarge0  - already has the BundleConfig setup in "ext/Shared/BundleConfig/Levels/MP_Subway"
+require("__shared/MP_Subway.lua")
+
+-- Grand Bazaar --ConquestSmall0, ConquestLarge0 - Both of these already have the BundleConfig setup in "ext/Shared/BundleConfig/Levels/MP_001"
+require("__shared/MP_001.lua") 
+
+-- Teheran Highway -  --ConquestSmall0, ConquestLarge0 - Both of these already have the BundleConfig setup in "ext/Shared/BundleConfig/Levels/MP_003"
+require("__shared/MP_003.lua") 
+
+-- Operation Firestorm -- ConquestLarge0 has the BundleConfig setup in "ext/Shared/BundleConfig/Levels/MP_012".
+require("__shared/MP_012.lua") 
+
+--Canals
+require("__shared/MP_017.lua") 
+
+require("__shared/MP_018.lua") -- Kharg Island
+require("__shared/XP5_002.lua") -- Nebandan Flats
+
+--Damavand Peak 2025-05-21
+require("__shared/MP_013.lua") 
 
 
 local networkIndex
@@ -21,7 +66,7 @@ function GetVehicleSpawnReference(spawnConfig)
 	local vehicleBlueprint = ResourceManager:SearchForDataContainer(spawnConfig.Blueprint)
 
 	if vehicleBlueprint == nil then
-		print("Could not find Vehicle blueprint: "..spawnConfig.Blueprint)
+		print("==================================================================CQ-MoreVehicles: Could not find Vehicle blueprint: "..spawnConfig.Blueprint)
 		return
 	end
 
@@ -68,9 +113,12 @@ function OnSubWorldLoaded(instance)
 
 	ResourceManager:AddRegistry(registry, ResourceCompartment.ResourceCompartment_Game)
 
-	print("Added Vehicle spawns")
+	print("==================================================================CQ-MoreVehicles: Added Vehicle spawns")
 end
 
+
+-- Removed since the BundleMounter submodule is handling the bundle loading
+--[[ 
 
 local bundleHook = nil	
 
@@ -100,6 +148,7 @@ function OnLoadBundles(hookCtx, bundles, compartment)
 		hookCtx:Pass(newBundles, compartment)
 	end
 end
+]]
 
 Events:Subscribe('Level:LoadResources', function(levelName, gameMode, isDedicatedServer)
     local levelId = levelName:reverse():match('[^/]+'):reverse()
@@ -114,14 +163,17 @@ Events:Subscribe('Level:LoadResources', function(levelName, gameMode, isDedicate
 		return
 	end
 
-	print("Found config for current level")
+	print("==================================================================CQ-MoreVehicles: Found config for current level")
 
 	if g_CurrentConfig.SubWorldGuids ~= nil and g_CurrentConfig.VehicleSpawns ~= nil then
-		ResourceManager:RegisterInstanceLoadHandlerOnce(g_CurrentConfig.SubWorldGuids.partitionGuid, g_CurrentConfig.SubWorldGuids.instanceGuid, OnSubWorldLoaded)
+        print("==================================================================CQ-MoreVehicles: if g_CurrentConfig.SubWorldGuids ~= nil and g_CurrentConfig.VehicleSpawns ~= nil then")
+        ResourceManager:RegisterInstanceLoadHandlerOnce(g_CurrentConfig.SubWorldGuids.partitionGuid, g_CurrentConfig.SubWorldGuids.instanceGuid, OnSubWorldLoaded)
+        print("==================================================================CQ-MoreVehicles: ResourceManager:RegisterInstanceLoadHandlerOnce(g_CurrentConfig.SubWorldGuids.partitionGuid, g_CurrentConfig.SubWorldGuids.instanceGuid, OnSubWorldLoaded)")
 	end
 
+-- Removed since the BundleMounter submodule is handling the bundle loading
+--[[
 	local hasBeenMounted = {}
-
 	if g_CurrentConfig.BundlesToMount ~= nil then
 		for _, bundleInfo in ipairs(g_CurrentConfig.BundlesToMount) do
 			if not hasBeenMounted[bundleInfo.SuperBundle] then
@@ -135,7 +187,7 @@ Events:Subscribe('Level:LoadResources', function(levelName, gameMode, isDedicate
 
 		bundleHook = Hooks:Install('ResourceManager:LoadBundles', 1, OnLoadBundles)
 	end
-
+]]
 	if g_CurrentConfig.SpawnsToDisable ~= nil then
 		print("Disabling BMP/LAV spawn")
 		for _, spawnInfo in ipairs(g_CurrentConfig.SpawnsToDisable) do
@@ -151,15 +203,19 @@ end)
 
 
 Events:Subscribe('Level:RegisterEntityResources', function(levelData)
+-- Removed since the BundleMounter submodule is handling the bundle loading & registry additions
+--[[
 	if bundleHook ~= nil then
 		bundleHook:Uninstall()
 		bundleHook = nil
 	end
-
+]]
 	if g_CurrentConfig == nil then
 		return
 	end
 
+-- Removed since the BundleMounter submodule is handling the bundle loading & registry additions
+--[[
 	local hasBeenAdded = {}
 
 	for _, bundleInfo in ipairs(g_CurrentConfig.BundlesToMount) do
@@ -175,6 +231,6 @@ Events:Subscribe('Level:RegisterEntityResources', function(levelData)
 			end
 		end
 	end
-
+]]
 	g_CurrentConfig = nil
 end)

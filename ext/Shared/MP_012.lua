@@ -1,3 +1,6 @@
+--You will no longer be using the 'BundlesToMount' section. It's ok to leave it as is, comment it out, or delete it.
+--The submodule mod 'BundleLoader' will handle injecting the SuperBundle, Bundles, and RegistryGuids. Refer to 'BundleLoader' README.md for how to set it up.
+
 CONFIG['MP_012'] = {
 	['ConquestSmall0'] = { 
 		SubWorldGuids = {
@@ -70,6 +73,7 @@ CONFIG['MP_012'] = {
 			}
 		},
 		VehicleSpawns = {
+--[[			
 			{
 				Blueprint = "Vehicles/XP3/M1128-Stryker/M1128-Stryker",
 				InitialSpawnDelay = 0,
@@ -80,27 +84,74 @@ CONFIG['MP_012'] = {
 				InitialSpawnDelay = 0,
 				RespawnDelay = 30,
 				Transform = LinearTransform(Vec3(-0.741146, -0.058035, 0.668831), Vec3(-0.065009, 0.997779, 0.014540), Vec3(-0.668189, -0.032704, -0.743273), Vec3(-721.042542, 134.563675, 212.980927))
-			},{
+			}			
+			,{
 				Blueprint = "Vehicles/A-10_THUNDERBOLT/A10_THUNDERBOLT",
 				InitialSpawnDelay = 0,
 				RespawnDelay = 30,
 				Transform = LinearTransform(Vec3(0.799367, 0.042311, -0.599352), Vec3(0.057273, 0.987610, 0.146105), Vec3(0.598107, -0.151118, 0.787039), Vec3(-856.444214, 136.271301, 222.840179))
-			},{
+			}
+			,{
 				Blueprint = "Vehicles/SU-25TM/SU-25TM",
 				InitialSpawnDelay = 0,
 				RespawnDelay = 30,
 				Transform = LinearTransform(Vec3(0.794755, -0.012412, 0.606803), Vec3(0.015271, 0.999883, 0.000450), Vec3(-0.606738, 0.008909, 0.794852), Vec3(643.177429, 112.703346, -229.801071))
-			},{
+			}
+			,{
 				Blueprint = "Vehicles/XP3/STAR_1466/STAR_1466",
 				InitialSpawnDelay = 0,
 				RespawnDelay = 30,
 				Transform = LinearTransform(Vec3(-0.454384, 0.000000, 0.890806), Vec3(0.000000, 1.000000, 0.000000), Vec3(-0.890806, 0.000000, -0.454384), Vec3(593.263245, 110.504684, -204.878906))
-			},{
+			}
+			,{
 				Blueprint = "Vehicles/XP3/2S25-SPRUT-SD/2S25_SPRUT-SD",
 				InitialSpawnDelay = 0,
 				RespawnDelay = 30,
 				Transform = LinearTransform(Vec3(-0.344760, 0.000000, 0.938691), Vec3(-0.016189, 0.999849, -0.006251), Vec3(-0.881747, -0.017224, -0.471407), Vec3(598.349609, 110.359467, -214.853516))
 			}
+]]			
+			{
+				Blueprint = "Vehicles/AH1Z/AH1Z",  --B flag, top of building
+				InitialSpawnDelay = 0,
+				RespawnDelay = 30,
+				Transform = LinearTransform(Vec3(0.999971, 0.000000, 0.007562), Vec3(0.000000, 1.000000, 0.000000), Vec3(-0.007562, 0.000000, 0.999971), Vec3(-120.324219, 137.397263, -135.796875))
+			}			
+			,{
+				Blueprint = "Vehicles/T90/T90",  --B flag, top of building
+				InitialSpawnDelay = 0,
+				RespawnDelay = 30,
+				Transform = LinearTransform(Vec3(0.993265, 0.000000, -0.115864), Vec3(0.000000, 1.000000, 0.000000), Vec3(0.115864, 0.000000, 0.993265), Vec3(-88.926758, 135.240036, -141.129883))
+			}				
+			,{
+				Blueprint = "Vehicles/AH6/AH6_Littlebird",  --C flag, top of building
+				InitialSpawnDelay = 0,
+				RespawnDelay = 30,
+				Transform = LinearTransform(Vec3(0.733513, 0.000000, 0.679675), Vec3(0.000000, 1.000000, 0.000000), Vec3(-0.679675, 0.000000, 0.733513), Vec3(80.991211, 126.204880, -154.387695))
+			}		
+			,{
+				Blueprint = "Vehicles/AH1Z/AH1Z",  --C flag, top of highest tower
+				InitialSpawnDelay = 0,
+				RespawnDelay = 30,
+				Transform = LinearTransform(Vec3(0.105732, -0.013311, -0.994306), Vec3(-0.020512, 0.999668, -0.015564), Vec3(0.994183, 0.022041, 0.105424), Vec3(21.611763, 229.352386, -77.322723))
+			}				
+			,{
+				Blueprint = "Vehicles/T90/T90",  --C flag, top of highest tower
+				InitialSpawnDelay = 0,
+				RespawnDelay = 30,
+				Transform = LinearTransform(Vec3(-1.000000, 0.000000, 0.000543), Vec3(0.000000, 1.000000, 0.000000), Vec3(-0.000543, 0.000000, -1.000000), Vec3(20.597828, 228.440445, -77.881966))
+			}				
+			,{
+				Blueprint = "Vehicles/AH6/AH6_Littlebird",  --US Spawn
+				InitialSpawnDelay = 0,
+				RespawnDelay = 30,
+				Transform = LinearTransform(Vec3(-0.666539, 0.000000, -0.745470), Vec3(0.000000, 1.000000, 0.000000), Vec3(0.745470, 0.000000, -0.666539), Vec3(-802.367188, 134.522385, 237.501953))
+			}			
+			,{
+				Blueprint = "Vehicles/AH6/AH6_Littlebird",  --RU Spawn
+				InitialSpawnDelay = 0,
+				RespawnDelay = 30,
+				Transform = LinearTransform(Vec3(0.682488, 0.000000, 0.730897), Vec3(0.000000, 1.000000, 0.000000), Vec3(-0.730897, 0.000000, 0.682488), Vec3(591.544922, 110.283005, -244.596680))
+			}				
 		}
 	}
 }

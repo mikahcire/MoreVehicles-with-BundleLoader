@@ -1,12 +1,12 @@
 {
-	"Name": "CQ-MoreVehicles",
+	"Name": "CQ-MoreVehicles-with-BundleLoader",
 	"Authors": ["KrazyIvan777"],
-	"Description": "adds vehicles to conquest maps",
+	"Description": "adds vehicles to maps. Edited by mikahcire (aHorriblePlayer) to use the BundeLoader submodule written by Flash_Hit",
 	"URL": "",
 	"Version": "1.0.0",
 	"HasWebUI": false,
 	"HasVeniceEXT": true,
-	"Tags": ["cq-morevehicles"],
+	"Tags": ["morevehicles"],
 	"RequiredXPacks": [3],
 	"Dependencies": {
 		"veniceext": "^1.0.0"
