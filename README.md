@@ -10,9 +10,13 @@ It was a polished mod, and I have made it unpolished.. haha.
 
 I have a liking for helicopters, and I wanted to add helis to Battlefield 3 maps and modes that did not originally have them. 
 
-With KrazyIvan's mod, the helicopters were not implemented, and when I did add them, I somehow couldn't get the helicopter HUD to display (among other things).
+With KrazyIvan's mod, the helicopters were not implemented on maps that did not originally have them. 
 
-Fortunately, I found [Flash_Hit's Bundleloader](https://github.com/FlashHit/BundleLoader) , but that I also meant I had to integrate the code to work with it, not knowing specifically if that would solve the HUD issue. (It did!).
+When I did add the helicopters, I somehow couldn't get the helicopter UI/HUD to display (among other things).
+
+Fortunately, I found [Flash_Hit's Bundleloader](https://github.com/FlashHit/BundleLoader) , but that also meant I had to integrate the code to work with it, not knowing specifically if that would solve the UI/HUD issue. (It did! Thanks Bree_Arnold!).
+
+Then there was a flying wobble issue that DesertShadow & Jassent helped me to solve.
 
 Seeing as I'm not a programmer, just someone who can kind of tinker here and there, it took me a lot of trial and error.
 
